@@ -18,8 +18,8 @@ void execute_command(char *command, char **environ)
 	if (pid == -1)
 
 	{
-		perror("fork");
-		exit(EXIT_FAILURE);
+		perror("Error (fork)");
+		exit(EXIT_SUCCESS);
 	}
 	else if (pid == 0)
 	{
@@ -33,8 +33,8 @@ void execute_command(char *command, char **environ)
 
 
 		/* If execve returns, an error occured */
-		perror("execve");
-		exit(EXIT_FAILURE);
+		perror("Error (execve)");
+		exit(EXIT_SUCCESS);
 	}
 	else
 	{
@@ -44,8 +44,8 @@ void execute_command(char *command, char **environ)
 		if (waitpid(pid, &status, 0) == -1)
 
 		{
-			perror("waitpid");
-			exit(EXIT_FAILURE);
+			perror("Error (waitpid)");
+			exit(EXIT_SUCCESS);
 		}
 	}
 }

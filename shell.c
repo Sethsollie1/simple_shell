@@ -23,8 +23,8 @@ int main(void)
 
 		if (num_read == -1)
 		{
-			perror("read");
-			exit(EXIT_FAILURE);
+			perror("Error (read)");
+			exit(EXIT_SUCCESS);
 		}
 		else if (num_read == 0)
 		{
