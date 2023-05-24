@@ -17,6 +17,7 @@ int tokenize_command(char *command, char **args)
 	int arg_count = 0;
 	char *token;
 	char *command_cpy = strdup(command); /* copy of command */
+	int i;
 
 	if (command_cpy == NULL)
 	{
@@ -36,5 +37,9 @@ int tokenize_command(char *command, char **args)
 
 	free(command_cpy); /* Free copied cmd string */
 
+	for (i = 0; i < arg_count; i++)
+	{
+		free(args[i]);
+	}
 	return (arg_count);
 }
