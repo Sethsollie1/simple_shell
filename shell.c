@@ -11,8 +11,6 @@ int main(void)
 	bool is_terminal = isatty(STDIN_FILENO);
 	ssize_t num_read;
 
-	char *args[MAX_COMMAND_LENGTH / 2 + 1];
-
 	while (true)
 	{
 		if (is_terminal)
@@ -25,23 +23,20 @@ int main(void)
 
 		if (num_read == -1)
 		{
-			perror("Error (read\n)");
-			exit(EXIT_SUCCESS);
+			perror("read");
+			exit(EXIT_FAILURE);
 		}
 		else if (num_read == 0)
 		{
 			/* End of file (Ctrl+D) */
 			break;
 		}
+
 		/* Remove trailing newline character */
 		if (command[num_read - 1] == '\n')
-			command[num_read - 1] = '\0';
+		command[num_read - 1] = '\0';
 
-		tokenize_command(command, args);
-
-		execute_command(args[0], args, environ);
-
+		execute_command(command, environ);
 	}
 	return (0);
 }
-

@@ -12,8 +12,7 @@
 #define MAX_COMMAND_LENGTH 1024
 #define PROMPT "$ "
 
-void execute_command(char *command, char **args, char **environ);
-int tokenize_command(char *command, char **args);
+void execute_command(char *command, char **environ);
 
 /* Environment variable */
 char **environ;
