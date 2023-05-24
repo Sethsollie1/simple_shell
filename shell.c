@@ -26,7 +26,7 @@ int main(void)
 		if (num_read == -1)
 		{
 			perror("Error (read\n)");
-			exit(EXIT_FAILURE);
+			exit(EXIT_SUCCESS);
 		}
 		else if (num_read == 0)
 		{
