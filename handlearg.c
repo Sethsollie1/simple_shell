@@ -21,7 +21,7 @@ int tokenize_command(char *command, char **args)
 	if (command_cpy == NULL)
 	{
 		perror("Error (strdup\n");
-		exit(EXIT_FAILURE);
+		exit(EXIT_SUCCESS);
 	}
 
 	token = strtok(command_cpy, " \t\n");
