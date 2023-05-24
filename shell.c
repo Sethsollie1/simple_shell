@@ -10,6 +10,7 @@ int main(void)
 	char command[MAX_COMMAND_LENGTH];
 	bool is_terminal = isatty(STDIN_FILENO);
 	ssize_t num_read;
+	char *cmd;
 
 	while (true)
 	{
@@ -36,7 +37,14 @@ int main(void)
 		if (command[num_read - 1] == '\n')
 		command[num_read - 1] = '\0';
 
-		execute_command(command, environ);
+		if (strlen(command) == 0 || strspn(command, " \t") == strlen(command))
+		{
+			continue;
+		}
+
+		cmd = strtok(command, " \t");
+
+		execute_command(cmd, environ);
 	}
 	return (0);
 }
