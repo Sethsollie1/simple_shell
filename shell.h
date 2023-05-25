@@ -13,7 +13,7 @@
 #define PROMPT "$ "
 
 void execute_command(char *cmd, char **environ);
-
+void print_env(void);
 /* Environment variable */
 char **environ;
 
