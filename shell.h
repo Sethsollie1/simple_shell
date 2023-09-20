@@ -1,79 +1,74 @@
-#ifndef SHELL_H
-#define SHELL_H
+#ifndef _SHELL_H_
+#define _SHELL_H_
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <sys/types.h>
+#include <unistd.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
-#include <unistd.h>
 #include <errno.h>
-#include <dirent.h>
-#include <signal.h>
+#include <string.h>
+#include <sys/types.h>
 
-
-/*constants*/
-#define EXTERNAL_COMMAND 1
-#define INTERNAL_COMMAND 2
-#define PATH_COMMAND 3
-#define INVALID_COMMAND -1
-
-#define min(x, y) (((x) < (y)) ? (x) : (y))
+#define MAX_INPUT_LENGTH 1024
+#define READ_BUF_SIZE 1024
 
 /**
- *struct map - a struct that maps a command name to a function 
- *
- *@command_name: name of the command
- *@func: the function that executes the command
+ * struct passinfo - contains passed in info
+ * @arg: the argument passed in
+ * @argv: the argument vector
+ * @path: the pointer to the path
+ * @fname: the file name
+ * @environ: a pointer to an array of strings reps env var
+ * @argc: the number of arguments
+ * @err_num: error numbers
+ * @linecount_flag: the line count flag
+ *  @env_changed: indicates a change in environment variable
+ * @status: the exist status
+ * @readfd: the file descriptor
+ * @line_count: the parameter
  */
 
-typedef struct map
+typedef struct passinfo
 {
-	char *command_name;
-	void (*func)(char **command);
-} function_map;
+	char *arg;
+	char **argv;
+	char *path;
+	int argc;
+	unsigned int line_count;
+	int err_num;
+	int linecount_flag;
+	char *fname;
+	char **environ;
+	int env_changed;
+	int status;
+	int readfd;
+} info_t;
 
-extern char **environ;
-extern char *line;
-extern char **commands;
-extern char *shell_name;
-extern int status;
-
-
-void print(char *, int);
-char **tokenizer(char *, char *);
-void remove_newline(char *);
-int _strlen(char *);
-void _strcpy(char *, char *);
-
-
-int _strcmp(char *, char *);
-char *_strcat(char *, char *);
-int _strspn(char *, char *);
-int _strcspn(char *, char *);
-char *_strchr(char *, char);
-
-
-char *_strtok_r(char *, char *, char **);
-int _atoi(char *);
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
-void ctrl_c_handler(int);
-void remove_comment(char *);
+/**
+ * struct builtin - contains a builtin string and related function
+ * @type: the builtin command flag
+ * @func: the function
+ */
+typedef struct builtin
+{
+	char *type;
+	int (*func)(info_t *);
+} builtin_table;
 
 
-int parse_command(char *);
-void execute_command(char **, int);
-char *check_path(char *);
-void (*get_func(char *))(char **);
-char *_getenv(char *);
+/* utils.c */
+
+info_t init_shell_info(void);
+void _print_error(char *app, char *msg);
+int _strlen(char *s);
+
+int hsh(info_t *, char **);
+int find_builtin(info_t *);
+void find_cmd(info_t *);
+void fork_cmd(info_t *);
+int is_cmd(info_t *, char *);
+
+#endif
 
 
-void env(char **);
-void quit(char **);
-
-/*main*/
-extern void non_interactive(void);
-extern void initializer(char **current_command, int type_command);
-
-#endif /*SHELL_H*/
