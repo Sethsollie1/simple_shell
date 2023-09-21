@@ -115,6 +115,44 @@ Simple shell 1.0 +
 
 Handle the commands separator ;
 
+12. && and ||
+#advanced
+Simple shell 1.0 +
 
+Handle the && and || shell logical operators
+
+13. alias
+#advanced
+Simple shell 1.0 +
+
+Implement the alias builtin command
+Usage: alias [name[='value'] ...]
+alias: Prints a list of all aliases, one per line, in the form name='value'
+alias name [name2 ...]: Prints the aliases name, name2, etc 1 per line, in the form name='value'
+alias name='value' [...]: Defines an alias for each name whose value is given. If name is already an alias, replaces its value with value
+
+14. Variables
+#advanced
+Simple shell 1.0 +
+
+Handle variables replacement
+Handle the $? variable
+Handle the $$ variable
+
+15. Comments
+#advanced
+Simple shell 1.0 +
+
+Handle comments (#)
+
+16. File as input
+#advanced
+Simple shell 1.0 +
+
+Usage: simple_shell [filename]
+Your shell can take a file as a command line argument
+The file contains all the commands that your shell should run before exiting
+The file should contain one command per line
+In this mode, the shell should not print a prompt and should not read from stdin
 
 
