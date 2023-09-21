@@ -29,4 +29,15 @@ be able to move the cursor
 handle commands with arguments
 execve will be the core part of your Shell, don’t forget to pass the environ to it…
 
+2. Simple shell 0.2
+mandatory
+Simple shell 0.1 +
 
+Handle command lines with arguments
+
+3. Simple shell 0.3
+mandatory
+Simple shell 0.2 +
+
+Handle the PATH
+fork must not be called if the command doesn’t exist
