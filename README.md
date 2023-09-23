@@ -63,3 +63,38 @@ mandatory
 Simple shell 0.4 +
 
 Implement the env built-in, that prints the current environment
+
+6. Simple shell 0.1.1
+#advanced
+
+Simple shell 0.1 +
+
+Write your own getline function
+Use a buffer to read many chars at once and call the least possible the read system call
+You will need to use static variables
+You are not allowed to use getline
+You don’t have to:
+
+be able to move the cursor
+
+
+7. Simple shell 0.2.1
+#advanced
+
+Simple shell 0.2 +
+
+You are not allowed to use strtok
+
+
+8. Simple shell 0.4.1
+#advanced
+
+Simple shell 0.4 +
+
+handle arguments for the built-in exit
+Usage: exit status, where status is an integer used to exit the shell
+julien@ubuntu:~/shell$ ./shell_0.4.1
+$ exit 98
+julien@ubuntu:~/shell$ echo $?
+98
+julien@ubuntu:~/shell$ 
